@@ -1,6 +1,8 @@
 # Assignment5
 ## Database
 
+atom://teletype/portal/593e3e7a-7248-4728-8925-8326a212ff29
+
 Tristan Chilvers
 2288893
 chilvers@chapman.edu
@@ -11,7 +13,7 @@ parnham@chapman.edu
 
 ### Outline
 
-Main method 
+Main method
 contains main loop. (highest level of code)
 
 BST template
