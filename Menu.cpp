@@ -92,6 +92,9 @@ void Menu::prompt(int ans)
       addStudent(id, n, l, m, a);
       break;
 
+    case 8:
+      cout << "Student's ID:"
+
     default:
       cout << "INVALID INPUT" << endl;
       cout << "DID NOT EXECUTE" << endl;
