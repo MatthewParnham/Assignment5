@@ -2,6 +2,8 @@
 #define FACULTY_H
 
 #include <iostream>
+#include "Person.h"
+#include "Student.h"
 #include "GenDoublyLL.h"
 
 using namespace std;
@@ -14,7 +16,7 @@ public:
   string getDepartment();
   void setDepartment(string d);
 
-  GenDoublyLL adviseeList;
+  GenDoublyLL<Student> adviseeList;
 private:
   string department;
 

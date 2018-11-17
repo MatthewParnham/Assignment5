@@ -3,16 +3,16 @@
 
 using namespace std;
 
-Faculty() {
+Faculty::Faculty() {
 
 }
-~Faculty() {
+Faculty::~Faculty() {
 
 }
 
-string getDepartment() {
+string Faculty::getDepartment() {
   return department;
 }
-void setDepartment(string d) {
+void Faculty::setDepartment(string d) {
   department = d;
 }
