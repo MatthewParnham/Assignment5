@@ -17,7 +17,7 @@ public:
   string getDepartment();
   void setDepartment(string d);
 
-  GenDoublyLL<Student> adviseeList;
+  GenDoublyLL<Student> *adviseeList;
 private:
   string department;
 
