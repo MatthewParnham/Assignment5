@@ -11,6 +11,7 @@ using namespace std;
 class Faculty : public Person {
 public:
   Faculty();
+  Faculty(int id, string n, string l, string d);
   ~Faculty();
 
   string getDepartment();
