@@ -1,33 +1,69 @@
-#include "BST.h"
-#include "TreeNode.h"
+#ifndef GENBST_H
+#define GENBST_H
+
+#include "GenTreeNode.h"
+
 using namespace std;
 
-BST::BST()
+//template class================================================================
+template <class T>
+class GenBST
+{
+  public:
+    GenBST();
+    ~GenBST();
+
+    void insert(T value);
+    bool contains(T value);
+    //bool deleteNode(int value);
+    //bool deleteRec(GenTreeNode *node);
+    bool deleteRec(T k);
+    bool isEmpty();
+
+    GenTreeNode<T>* getSuccessor(GenTreeNode<T> *d);
+
+    void printTree();
+    void recPrint(GenTreeNode<T> *node); //in-order traversal
+
+    GenTreeNode<T>* getRoot();
+
+  private:
+    GenTreeNode<T> *root;
+};
+
+//template functions============================================================
+template <class T>
+GenBST<T>::GenBST()
 {
   root = NULL;
 }
 
-BST::~BST()
+template <class T>
+GenBST<T>::~GenBST()
 {
   delete root;
 }
 
-void BST::printTree()
+template <class T>
+ void GenBST<T>::printTree()
 {
   recPrint(root); //A B S T R A C T I O N . . . . .
 }
 
-bool BST::isEmpty()
+template <class T>
+bool GenBST<T>::isEmpty()
 {
   return root == NULL;
 }
 
-TreeNode* BST::getRoot()
+template <class T>
+GenTreeNode<T>* GenBST<T>::getRoot()
 {
   return root;
 }
 
-void BST::recPrint(TreeNode *node)
+template <class T>
+void GenBST<T>::recPrint(GenTreeNode<T> *node)
 {
   if(node == NULL)
   {
@@ -39,21 +75,22 @@ void BST::recPrint(TreeNode *node)
   recPrint(node->right);
 }
 
-void BST::insert(int value)
+template <class T>
+void GenBST<T>::insert(T value)
 {
   // check for duplicates
 
-  TreeNode *node = new TreeNode(value);
+  GenTreeNode<T> *node = new GenTreeNode<T>(value);
 
   if(isEmpty())
   {
     root = node;
   }
 
-  else //not an empty TreeNode, find insertion point
+  else //not an empty GenTreeNode, find insertion point
   {
-    TreeNode *curr = root;
-    TreeNode *par; //empty TreeNode
+    GenTreeNode<T> *curr = root;
+    GenTreeNode<T> *par; //empty GenTreeNode
 
     while(true) //while par == null;  begin search for insertion point
     {
@@ -82,7 +119,8 @@ void BST::insert(int value)
 }
 
 //search method
-bool BST::contains(int value)
+template <class T>
+bool GenBST<T>::contains(T value)
 {
   if(isEmpty())
   {
@@ -90,7 +128,7 @@ bool BST::contains(int value)
   }
   else //not empty continue search
   {
-    TreeNode *curr = root;
+    GenTreeNode<T> *curr = root;
 
     while(curr->key != value)
     {
@@ -119,7 +157,8 @@ bool BST::contains(int value)
   return true;
 }
 
-bool BST::deleteRec(int k) //figure out exactly how node is deleted (garbage collected)
+template <class T>
+bool GenBST<T>::deleteRec(T k) //figure out exactly how node is deleted (garbage collected)
 {
   //use contains method
   if(!contains(k))
@@ -127,12 +166,12 @@ bool BST::deleteRec(int k) //figure out exactly how node is deleted (garbage col
     return false;
   }
 
-  //let's proceed to find the TreeNode
-  TreeNode *curr = root; //curr
-  TreeNode *par = root; //par
+  //let's proceed to find the GenTreeNode
+  GenTreeNode<T> *curr = root; //curr
+  GenTreeNode<T> *par = root; //par
   bool isLeft = true;
 
-  //let's look for the TreeNode
+  //let's look for the GenTreeNode
   while(curr->key != k)
   {
 
@@ -215,7 +254,7 @@ bool BST::deleteRec(int k) //figure out exactly how node is deleted (garbage col
 
   else //it has two children, at this point we begin to cry and take a long nap
   {
-    TreeNode *success = getSuccessor(curr);
+    GenTreeNode<T> *success = getSuccessor(curr);
 
     if(curr == root)
     {
@@ -237,11 +276,12 @@ bool BST::deleteRec(int k) //figure out exactly how node is deleted (garbage col
 }
 
 //d is the node we are deleting
-TreeNode* BST::getSuccessor(TreeNode *d) //find node to replace d
+template <class T>
+GenTreeNode<T>* GenBST<T>::getSuccessor(GenTreeNode<T> *d) //find node to replace d
 {
-  TreeNode *sp = d;
-  TreeNode *success = d;
-  TreeNode *curr = d->right;
+  GenTreeNode<T> *sp = d;
+  GenTreeNode<T> *success = d;
+  GenTreeNode<T> *curr = d->right;
 
   while(curr != NULL)
   {
@@ -258,3 +298,5 @@ TreeNode* BST::getSuccessor(TreeNode *d) //find node to replace d
 
   return success;
 }
+
+#endif

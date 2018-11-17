@@ -1,9 +1,9 @@
-#include "BST.h"
-#include "TreeNode.h"
+#include "GenBST.h"
+#include "GenTreeNode.h"
 #include "FileIO.h"
 
 int main(int argc, char const *argv[]) {
-  BST bst;
+  GenBST<int> bst;
 
   bst.insert(5);
   bst.insert(6);
