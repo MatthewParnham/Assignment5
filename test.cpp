@@ -6,24 +6,21 @@ int main(int argc, char const *argv[]) {
   BST bst;
 
   bst.insert(5);
-  bst.printTree();
-
-  cout << endl;
   bst.insert(6);
+  bst.insert(4);
+  bst.insert(3);
+  bst.insert(2);
+  bst.insert(1);
+  bst.insert(7);
+  bst.insert(8);
+  bst.insert(10);
+  bst.insert(9);
+
   bst.printTree();
-
-  cout << endl;
-
-  bool object;
-  object = bst.contains(5);
-  cout << object << endl;
 
   bst.deleteRec(5);
-  object = bst.contains(5);
-
+  bst.deleteRec(8);
   bst.printTree();
-
-  cout << endl;
 
   return 0;
 }

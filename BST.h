@@ -21,6 +21,8 @@ class BST
     void printTree();
     void recPrint(TreeNode *node); //in-order traversal
 
+    TreeNode* getRoot();
+
   private:
     TreeNode *root;
 };

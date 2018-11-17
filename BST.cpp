@@ -22,6 +22,11 @@ bool BST::isEmpty()
   return root == NULL;
 }
 
+TreeNode* BST::getRoot()
+{
+  return root;
+}
+
 void BST::recPrint(TreeNode *node)
 {
   if(node == NULL)
@@ -94,7 +99,13 @@ bool BST::contains(int value)
         return false;
       }
 
-      if(value < curr->key)
+      //check if leaf
+      if(curr->left == NULL && curr->right == NULL)
+      {
+        return value == curr->key;
+      }
+
+      else if(value < curr->key)
       {
         curr = curr->left;
       }
@@ -152,18 +163,18 @@ bool BST::deleteRec(int k) //figure out exactly how node is deleted (garbage col
 
     if(curr == root)
     {
-      delete curr;
       root = NULL;
     }
 
     else if(isLeft)
     {
-      par->left == NULL;
+      par->left = NULL;
     }
     else
     {
-      par->right == NULL;
+      par->right = NULL;
     }
+    delete curr;
   }
 
 
@@ -173,6 +184,8 @@ bool BST::deleteRec(int k) //figure out exactly how node is deleted (garbage col
     if(curr == root)
     {
       root = curr->left;
+      curr->left = NULL;
+      delete curr;
     }
     else if(isLeft)
     {
