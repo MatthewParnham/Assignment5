@@ -41,3 +41,17 @@ int Student::getAdvisor() {
 void Student::setAdvisor(int a) {
   advisor = a;
 }
+
+//operator overloading
+bool Student::operator>(Student* other) {
+  return this->getID() > other->getID();
+}
+bool Student::operator<(Student* other) {
+  return this->getID() < other->getID();
+}
+bool Student::operator==(Student* other) {
+  return this->getID() == other->getID();
+}
+int Student::operator<<(Student* p) {
+  return p->ID;
+}

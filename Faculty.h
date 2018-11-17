@@ -18,6 +18,11 @@ public:
   void setDepartment(string d);
 
   GenDoublyLL<Student> *adviseeList;
+
+  bool operator>(Faculty* other);
+  bool operator<(Faculty* other);
+  bool operator==(Faculty* other);
+  int operator<<(Faculty* p);
 private:
   string department;
 
