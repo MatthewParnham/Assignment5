@@ -18,6 +18,11 @@ public:
 
   int getAdvisor();
   void setAdvisor(int a);
+
+  bool operator>(Student* other);
+  bool operator<(Student* other);
+  bool operator==(Student* other);
+  int operator<<(Student* p);
 private:
   string major;
   int advisor;

@@ -27,3 +27,18 @@ string Faculty::getDepartment() {
 void Faculty::setDepartment(string d) {
   department = d;
 }
+
+
+//operator overloading
+bool Faculty::operator>(Faculty* other) {
+  return this->getID() > other->getID();
+}
+bool Faculty::operator<(Faculty* other) {
+  return this->getID() < other->getID();
+}
+bool Faculty::operator==(Faculty* other) {
+  return this->getID() == other->getID();
+}
+int Faculty::operator<<(Faculty* p) {
+  return p->ID;
+}
