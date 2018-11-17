@@ -2,12 +2,9 @@
 #define PERSON_H
 
 #include <iostream>
-#include "BST.h"
-#include "GenStack.h"
-#include "Faculty.h"
-#include "Menu.h"
-#include "Student.h"
-#include "TreeNode.h"
+#include <string>
+
+using namespace std;
 
 class Person {
 public:
@@ -23,7 +20,8 @@ public:
 
   string getLevel();
   void setLevel(string l);
-private:
+
+protected:
   int ID;
   string name;
   string level;
