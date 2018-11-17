@@ -1,4 +1,5 @@
 #include "BST.h"
+#include "TreeNode.h"
 using namespace std;
 
 BST::BST()
@@ -8,7 +9,7 @@ BST::BST()
 
 BST::~BST()
 {
-  //iterate and delete???
+
 }
 
 void BST::printTree()
@@ -16,9 +17,9 @@ void BST::printTree()
   recPrint(root); //A B S T R A C T I O N . . . . .
 }
 
-void BST::isEmpty()
+bool BST::isEmpty()
 {
-  return root = NULL;
+  return root == NULL;
 }
 
 void BST::recPrint(TreeNode *node)
@@ -29,7 +30,7 @@ void BST::recPrint(TreeNode *node)
   }
 
   recPrint(node->left);
-  cout << node->data << endl;
+  cout << node->key << endl;
   recPrint(node->right);
 }
 
@@ -118,11 +119,12 @@ bool BST::deleteRec(int k) //figure out exactly how node is deleted (garbage col
   //let's proceed to find the TreeNode
   TreeNode *curr = root; //curr
   TreeNode *par = root; //par
-  bool isLeft;
+  bool isLeft = true;
 
   //let's look for the TreeNode
   while(curr->key != k)
   {
+
     par = curr;
 
     if(k < curr->key) //go left
@@ -147,8 +149,10 @@ bool BST::deleteRec(int k) //figure out exactly how node is deleted (garbage col
 
   if(curr->left == NULL && curr->right == NULL) //then it's a leaf
   {
-    if(curr = root)
+
+    if(curr == root)
     {
+      delete curr;
       root = NULL;
     }
 
@@ -161,6 +165,7 @@ bool BST::deleteRec(int k) //figure out exactly how node is deleted (garbage col
       par->right == NULL;
     }
   }
+
 
   //check if has one child
   else if(curr->right == NULL) //no right child, must be isLeft
@@ -203,7 +208,7 @@ bool BST::deleteRec(int k) //figure out exactly how node is deleted (garbage col
     {
       root = success;
     }
-    else if(ifLeft)
+    else if(isLeft)
     {
       par->left = success;
     }
@@ -214,6 +219,7 @@ bool BST::deleteRec(int k) //figure out exactly how node is deleted (garbage col
 
     success->left = curr->left;
   }
+
   return true;
 }
 
@@ -222,7 +228,7 @@ TreeNode* BST::getSuccessor(TreeNode *d) //find node to replace d
 {
   TreeNode *sp = d;
   TreeNode *success = d;
-  TreeNode *current = d->right;
+  TreeNode *curr = d->right;
 
   while(curr != NULL)
   {
