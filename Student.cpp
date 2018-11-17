@@ -14,6 +14,16 @@ Student::Student() {
   major = "NULL";
   advisor = 0;
 }
+
+Student::Student(int id, string n, string l, string m, int a)
+{
+  ID = id;
+  name = n;
+  level = l;
+  major = m;
+  advisor = a;
+}
+
 Student::~Student() {
 
 }
