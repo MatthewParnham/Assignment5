@@ -2,12 +2,10 @@
 #define STUDENT_H
 
 #include <iostream>
-#include "BST.h"
-#include "GenStack.h"
-#include "Faculty.h"
-#include "Menu.h"
+#include <string>
 #include "Person.h"
-#include "TreeNode.h"
+
+using namespace std;
 
 class Student : public Person {
 public:
