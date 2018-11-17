@@ -9,7 +9,7 @@ BST::BST()
 
 BST::~BST()
 {
-
+  delete root;
 }
 
 void BST::printTree()
