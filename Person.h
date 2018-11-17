@@ -21,6 +21,12 @@ public:
   string getLevel();
   void setLevel(string l);
 
+  //operator overloading
+  bool operator>(Person* other);
+  bool operator<(Person* other);
+  bool operator==(Person* other);
+  int operator<<(Person* p);
+
 protected:
   int ID;
   string name;

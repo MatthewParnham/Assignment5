@@ -36,3 +36,17 @@ string Person::getLevel() {
 void Person::setLevel(string l) {
   level = l;
 }
+
+//operator overloading
+bool Person::operator>(Person* other) {
+  return this->getID() > other->getID();
+}
+bool Person::operator<(Person* other) {
+  return this->getID() < other->getID();
+}
+bool Person::operator==(Person* other) {
+  return this->getID() == other->getID();
+}
+int Person::operator<<(Person* p) {
+  return p->ID;
+}
