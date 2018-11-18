@@ -30,15 +30,18 @@ void Faculty::setDepartment(string d) {
 
 
 //operator overloading
-bool Faculty::operator>(Faculty* other) {
-  return this->getID() > other->getID();
+bool operator>(Faculty& t1, Faculty& t2) {
+  return t1.getID() > t2.getID();
 }
-bool Faculty::operator<(Faculty* other) {
-  return this->getID() < other->getID();
+bool operator<(Faculty& t1, Faculty& t2) {
+  return t1.getID() < t2.getID();
 }
-bool Faculty::operator==(Faculty* other) {
-  return this->getID() == other->getID();
+bool operator==(Faculty& t1, Faculty& t2) {
+  return t1.getID() == t2.getID();
 }
-int Faculty::operator<<(Faculty* p) {
-  return p->ID;
+ostream& operator<<(ostream& os, const Faculty& t1) {
+  os << "ID: " << t1.ID << " Name: " << t1.name << " Level: "
+  << t1.level << " Department: " << t1.department << " Advisees: ";
+  //somehow print advisees
+  return os;
 }

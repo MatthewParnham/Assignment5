@@ -19,10 +19,10 @@ public:
 
   GenDoublyLL<Student> *adviseeList;
 
-  bool operator>(Faculty* other);
-  bool operator<(Faculty* other);
-  bool operator==(Faculty* other);
-  int operator<<(Faculty* p);
+  friend bool operator>(Faculty& s1, Faculty& s2);
+  friend bool operator<(Faculty& s1, Faculty& s2);
+  friend bool operator==(Faculty& s1, Faculty& s2);
+  friend ostream& operator<<(ostream& os, const Faculty& s1);
 private:
   string department;
 
