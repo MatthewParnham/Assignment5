@@ -54,7 +54,7 @@ public:
   void rollBack(); //???????
 
 //14. Exit
-  void exit();
+  void quit();
 
 private:
 };

@@ -43,15 +43,16 @@ void Student::setAdvisor(int a) {
 }
 
 //operator overloading
-bool Student::operator>(Student* other) {
-  return this->getID() > other->getID();
+bool operator>(Student& s1, Student& s2) {
+  return s1.getID() > s2.getID();
 }
-bool Student::operator<(Student* other) {
-  return this->getID() < other->getID();
+bool operator<(Student& s1, Student& s2) {
+  return s1.getID() < s2.getID();
 }
-bool Student::operator==(Student* other) {
-  return this->getID() == other->getID();
+bool operator==(Student& s1, Student& s2) {
+  return s1.getID() == s2.getID();
 }
-int Student::operator<<(Student* p) {
-  return p->ID;
+ostream& operator<<(ostream& os, const Student& s1) {
+  os << "ID: " << s1.ID << " Name: " << s1.name << " Level: " << s1.level << " Major: " << s1.major << " Advisor: " << s1.advisor;
+  return os;
 }

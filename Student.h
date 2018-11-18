@@ -19,10 +19,10 @@ public:
   int getAdvisor();
   void setAdvisor(int a);
 
-  bool operator>(Student* other);
-  bool operator<(Student* other);
-  bool operator==(Student* other);
-  int operator<<(Student* p);
+  friend bool operator>(Student& s1, Student& s2);
+  friend bool operator<(Student& s1, Student& s2);
+  friend bool operator==(Student& s1, Student& s2);
+  friend ostream& operator<<(ostream& os, const Student& s1);
 private:
   string major;
   int advisor;

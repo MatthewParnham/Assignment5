@@ -3,6 +3,7 @@
 #include <string>
 #include "Student.h"
 #include "Faculty.h"
+#include <stdlib.h>
 
 using namespace std;
 
@@ -93,11 +94,13 @@ void Menu::prompt(int ans)
       break;
 
     case 8:
-      cout << "Student's ID:"
-
+      cout << "Student's ID:";
+      break;
     default:
       cout << "INVALID INPUT" << endl;
       cout << "DID NOT EXECUTE" << endl;
+      exit(EXIT_FAILURE);
+      break;
   }
 }
 
