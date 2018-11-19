@@ -99,7 +99,7 @@ void Menu::prompt(int ans)
     default:
       cout << "INVALID INPUT" << endl;
       cout << "DID NOT EXECUTE" << endl;
-      exit(EXIT_FAILURE);
+      //exit(EXIT_FAILURE);
       break;
   }
 }

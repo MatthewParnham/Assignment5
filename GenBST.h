@@ -2,6 +2,7 @@
 #define GENBST_H
 
 #include "GenTreeNode.h"
+#include <fstream>
 
 using namespace std;
 
@@ -24,6 +25,7 @@ class GenBST
 
     void printTree();
     void recPrint(GenTreeNode<T> *node); //in-order traversal
+    void saveTree(ofstream& os, GenTreeNode<T> *node);
 
     GenTreeNode<T>* getRoot();
 
@@ -73,6 +75,18 @@ void GenBST<T>::recPrint(GenTreeNode<T> *node)
   recPrint(node->left);
   cout << node->key << endl;
   recPrint(node->right);
+}
+
+template <class T>
+void GenBST<T>::saveTree(ofstream& os, GenTreeNode<T> *node) {
+  if(node == NULL)
+  {
+    return;
+  }
+
+  os << node->key << endl;
+  saveTree(os, node->left);
+  saveTree(os, node->right);
 }
 
 template <class T>

@@ -7,34 +7,17 @@
 #include "Student.h"
 #include "GenTreeNode.h"
 #include "GenDoublyLL.h"
+#include <fstream>
+#include <string>
 
 using namespace std;
 
 int main(int argc, char const *argv[]) {
   //Testing
-  Student s1;
-  Student s2;
-  s1.setID(5);
-  s2.setID(2);
-  cout << s1 << endl;
-  s2.setName("Rene German");
-  s2.setLevel("Freshman");
-  s2.setMajor("Computer Science");
-  cout << s2 << endl;
-  cout << "\n\n";
-  if (s1 > s2)
-    cout << s1 << endl;
-  else
-    cout << s2 << endl;
 
-  cout << (s1 == s2) << endl;
-  s2.setID(5);
-  cout << (s1 == s2) << endl;
-
-  cout << "=========================================================\n\n";
   //program start
 
-  /*
+  ///*
 
   // Declare Tables
   GenBST<Student> masterStudent;
@@ -42,6 +25,20 @@ int main(int argc, char const *argv[]) {
 
   // Check if save file exists
 
+  ifstream in;
+  in.open("masterStudent");
+  if(in) {
+    string line;
+    while(getline(in, line)) {
+      int ID = stoi(line.substr(4,(line.find("Name")-5)));
+      string name = line.substr(line.find("Name")+6,line.find("Level")-1-line.find("Name")+6);
+      string level = line.substr(line.find("Level")+7,line.find("Major")-1-line.find("Level")+7);
+      string major = line.substr(line.find("Major")+7,line.find("Advisor")-1-line.find("Major")+7);
+      int advisor = stoi(line.substr(line.find("Advisor")+9,string::npos));
+      masterStudent.insert(*(new Student(ID,name,level,major,advisor)));
+    }
+  }
+  masterStudent.printTree();
   // // Load save files
   // if(saveFound) {
   //
@@ -54,16 +51,26 @@ int main(int argc, char const *argv[]) {
   // }
 
   // Menu loop
-  while(true) {
+  //while(true) {
     Menu menu;
     int ans;
     menu.printMenu();
     cin >> ans;
     menu.prompt(ans);
-  }
+  //}
 
   //*/
+//Student(int id, string n, string l, string m, int a);
+  masterStudent.insert(*(new Student(10,"Matthew Parnham","Sophomore","Software Engineering",1)));
+  masterStudent.insert(*(new Student(5,"Jim","Freshman","Business",1)));
+  masterStudent.insert(*(new Student(12,"Frank","Sophomore","Software Engineering",1)));
+  masterStudent.insert(*(new Student(6,"Bonnie","Senior","Biology",1)));
+  masterStudent.insert(*(new Student(11,"Jack","Sophomore","Economics",1)));
 
   // Save
+  ofstream out;
+  out.open("masterStudent");
+  masterStudent.saveTree(out, masterStudent.getRoot());
+
   return 0;
 }
