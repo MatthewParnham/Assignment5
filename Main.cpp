@@ -38,6 +38,7 @@ int main(int argc, char const *argv[]) {
       masterStudent.insert(*(new Student(ID,name,level,major,advisor)));
     }
   }
+  in.close();
   masterStudent.printTree();
   // // Load save files
   // if(saveFound) {
@@ -49,7 +50,7 @@ int main(int argc, char const *argv[]) {
   //   masterStudent = new GenBST();
   //   masterFaculty = new GenBST();
   // }
-
+  masterStudent.insert(*(new Student(10,"Matthew Parnham","Sophomore","Software Engineering",1)));
   // Menu loop
   //while(true) {
     Menu menu;
@@ -60,17 +61,12 @@ int main(int argc, char const *argv[]) {
   //}
 
   //*/
-//Student(int id, string n, string l, string m, int a);
-  masterStudent.insert(*(new Student(10,"Matthew Parnham","Sophomore","Software Engineering",1)));
-  masterStudent.insert(*(new Student(5,"Jim","Freshman","Business",1)));
-  masterStudent.insert(*(new Student(12,"Frank","Sophomore","Software Engineering",1)));
-  masterStudent.insert(*(new Student(6,"Bonnie","Senior","Biology",1)));
-  masterStudent.insert(*(new Student(11,"Jack","Sophomore","Economics",1)));
 
   // Save
   ofstream out;
   out.open("masterStudent");
   masterStudent.saveTree(out, masterStudent.getRoot());
+  out.close();
 
   return 0;
 }
