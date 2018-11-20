@@ -4,13 +4,15 @@
 #include "Student.h"
 #include "Faculty.h"
 #include <stdlib.h>
+#include "GenBST.h"
 
 using namespace std;
 
 //constructor/destructor=========================================================
-Menu::Menu()
+Menu::Menu(GenBST<Student>* ms, GenBST<Faculty>* mf)
 {
-
+  masterStudent = ms;
+  masterFaculty = mf;
 }
 
 Menu::~Menu()
@@ -81,12 +83,13 @@ void Menu::prompt(int ans)
     case 7:
       cout << "ID: " << endl;
       cin >> id;
+      cin.ignore();
       cout << "Name: " << endl;
-      cin >> n;
+      getline(cin, n);
       cout << "Level: " << endl;
-      cin >> l;
+      getline(cin, l);
       cout << "Major: " << endl;
-      cin >> m;
+      getline(cin, m);
       cout << "Advisor: " << endl;
       cin >> a;
 
@@ -95,6 +98,9 @@ void Menu::prompt(int ans)
 
     case 8:
       cout << "Student's ID:";
+      break;
+    case 14:
+      cout << "Exiting" << endl;
       break;
     default:
       cout << "INVALID INPUT" << endl;
@@ -108,12 +114,14 @@ void Menu::prompt(int ans)
 void Menu::printStudents()
 {
   cout << "PRINTING STUDENTS" << endl;
+  masterStudent->printTree();
 }
 
 //2
 void Menu::printFaculty()
 {
   cout << "PRINTING FACULTY" << endl;
+  masterFaculty->printTree();
 }
 
 //3
@@ -145,6 +153,7 @@ void Menu::printAdvisees(int id)
 void Menu::addStudent(int id, string n, string l, string m, int a)
 {
   cout << "ADDING STUDENT" << endl;
+  masterStudent->insert(*(new Student(id,n,l,m,a)));
 }
 
 //8

@@ -4,11 +4,12 @@
 #include "Student.h"
 #include "Faculty.h"
 #include <string>
+#include "GenBST.h"
 
 class Menu
 {
 public:
-  Menu();
+  Menu(GenBST<Student>* ms, GenBST<Faculty>* mf);
   ~Menu();
 
   void printMenu();
@@ -55,6 +56,10 @@ public:
 
 //14. Exit
   void quit();
+
+//inst vars
+GenBST<Student>* masterStudent;
+GenBST<Faculty>* masterFaculty;
 
 private:
 };
