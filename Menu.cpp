@@ -49,7 +49,7 @@ void Menu::prompt(int ans)
 {
   int id, a;
   string n, l, m;
-
+cout << "TEST" << endl;
   switch(ans) {
     case 1:
       printStudents();
@@ -99,9 +99,26 @@ void Menu::prompt(int ans)
     case 8:
       cout << "Student's ID:";
       break;
+
+    case 9:
+      break;
+
+    case 10:
+      break;
+
+    case 11:
+      break;
+
+    case 12:
+      break;
+
+    case 13:
+      break;
+
     case 14:
       cout << "Exiting" << endl;
       break;
+
     default:
       cout << "INVALID INPUT" << endl;
       cout << "DID NOT EXECUTE" << endl;

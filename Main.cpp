@@ -39,8 +39,19 @@ int main(int argc, char const *argv[]) {
   masterFaculty.insert(*(new Faculty(5,"Rene German","Faculty","Computer Science")));
   GenTreeNode<Faculty>* curr = masterFaculty.getRoot();
   while(curr != NULL) {
-
+    if(curr->key.getID() == 5) {
+      break;
+    }
+    else {
+      if(curr->key.getID() > 5) {
+        curr = curr->left;
+      }
+      else if(curr->key.getID() < 5){
+        curr = curr->right;
+      }
+    }
   }
+  cout << curr->key << endl;
 
 
 //Main Loop of program
@@ -48,8 +59,12 @@ int main(int argc, char const *argv[]) {
   int ans;
   while(ans != 14) {
     menu.printMenu();
-    cin >> ans;
+    cout << "Line 62" << endl;
+    //cin >> ans;
+    ans = 14;
+    cout << ans << endl;
     menu.prompt(ans);
+    //cout << "line 67" << endl;
   }
 
 
