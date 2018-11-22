@@ -36,6 +36,12 @@ int main(int argc, char const *argv[]) {
   in.close();
   masterStudent.printTree();
 
+  masterFaculty.insert(*(new Faculty(5,"Rene German","Faculty","Computer Science")));
+  GenTreeNode<Faculty>* curr = masterFaculty.getRoot();
+  while(curr != NULL) {
+
+  }
+
 
 //Main Loop of program
   Menu menu(&masterStudent,&masterFaculty);
