@@ -49,7 +49,6 @@ void Menu::prompt(int ans)
 {
   int id, a;
   string n, l, m;
-cout << "TEST" << endl;
   switch(ans) {
     case 1:
       printStudents();
