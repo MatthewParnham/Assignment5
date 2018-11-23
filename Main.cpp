@@ -62,7 +62,7 @@ int main(int argc, char const *argv[]) {
     cout << "Line 62" << endl;
     //cin >> ans;
     ans = 14;
-    cout << ans << endl;
+    //cout << ans << endl;
     menu.prompt(ans);
     //cout << "line 67" << endl;
   }
