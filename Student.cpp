@@ -52,6 +52,15 @@ bool operator<(Student& s1, Student& s2) {
 bool operator==(Student& s1, Student& s2) {
   return s1.getID() == s2.getID();
 }
+bool operator>(Student& s1, int i) {
+  return s1.getID() > i;
+}
+bool operator<(Student& s1, int i) {
+  return s1.getID() < i;
+}
+bool operator==(Student& s1, int i) {
+  return s1.getID() == i;
+}
 ostream& operator<<(ostream& os, const Student& s1) {
   os << "ID: " << s1.ID << " Name: " << s1.name << " Level: " << s1.level << " Major: " << s1.major << " Advisor: " << s1.advisor;
   return os;

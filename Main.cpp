@@ -34,25 +34,10 @@ int main(int argc, char const *argv[]) {
     }
   }
   in.close();
-  masterStudent.printTree();
+  //masterStudent.printTree();
 
-  //masterFaculty.insert(*(new Faculty(5,"Rene German","Faculty","Computer Science")));
-  /*GenTreeNode<Faculty>* curr = masterFaculty.getRoot();
-  while(curr != NULL) {
-    if(curr->key.getID() == 5) {
-      break;
-    }
-    else {
-      if(curr->key.getID() > 5) {
-        curr = curr->left;
-      }
-      else if(curr->key.getID() < 5){
-        curr = curr->right;
-      }
-    }
-  }
-  cout << curr->key << endl;*/
-
+  masterFaculty.insert(*(new Faculty(5,"Rene German","Faculty","Computer Science")));
+  cout << masterFaculty.search(5) << endl;
 
 //Main Loop of program
   Menu menu(&masterStudent,&masterFaculty);
