@@ -34,6 +34,7 @@ class GenDoublyLL
     unsigned int getSize();
     ListNode<T>* getFront();
     ListNode<T>* getBack();
+
 };
 
 //template functions============================================================
@@ -280,5 +281,6 @@ ListNode<T>* GenDoublyLL<T>::getBack()
 {
   return back;
 }
+
 
 #endif

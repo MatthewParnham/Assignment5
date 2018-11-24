@@ -17,7 +17,7 @@ public:
   string getDepartment();
   void setDepartment(string d);
 
-  //GenDoublyLL<Student> *adviseeList;
+  GenDoublyLL<int> *adviseeList;
 
   friend bool operator>(Faculty& s1, Faculty& s2);
   friend bool operator>(Faculty& s1, int i);

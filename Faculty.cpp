@@ -8,17 +8,17 @@ Faculty::Faculty() {
   name = "NULL";
   level = "NULL";
   department = "NULL";
-  //adviseeList = new GenDoublyLL<Student>();
+  adviseeList = new GenDoublyLL<int>();
 }
 Faculty::Faculty(int id, string n, string l, string d) {
   ID = id;
   name = n;
   level = l;
   department = d;
-  //adviseeList = new GenDoublyLL<Student>();
+  adviseeList = new GenDoublyLL<int>();
 }
 Faculty::~Faculty() {
-  //delete adviseeList;
+
 }
 
 string Faculty::getDepartment() {
@@ -51,6 +51,13 @@ bool operator==(Faculty& t1, int i) {
 ostream& operator<<(ostream& os, const Faculty& t1) {
   os << "ID: " << t1.ID << " Name: " << t1.name << " Level: "
   << t1.level << " Department: " << t1.department << " Advisees: ";
-  //somehow print advisees
+
+  ListNode<int> *curr = t1.adviseeList->getFront();
+
+  while(curr != NULL)
+  {
+    os << *curr->data << " ";
+    curr = curr->next;
+  }
   return os;
 }

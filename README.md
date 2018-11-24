@@ -35,3 +35,5 @@ Menu Class
 contains methods for printing the menu options and parsing user input
 
 ### Resources
+
+https://stackoverflow.com/questions/4660123/overloading-friend-operator-for-template-class/4661372
