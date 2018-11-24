@@ -3,7 +3,7 @@
 
 using namespace std;
 
-Faculty::Faculty() {
+Faculty::Faculty() { //default constructor sets values to NULL
   ID = 0;
   name = "NULL";
   level = "NULL";

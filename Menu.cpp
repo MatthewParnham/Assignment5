@@ -219,6 +219,16 @@ void Menu::deleteFaculty(int id) {
 }
 
 //11
+void changeAdvisor(int sid, int fid) {
 
+}
 
 //12
+void removeAdvisee(int sid, int fid) {
+
+}
+
+//13
+void rollBack() {
+  
+}
