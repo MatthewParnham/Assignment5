@@ -5,11 +5,12 @@
 #include "Faculty.h"
 #include <string>
 #include "GenBST.h"
+#include <unordered_set>
 
 class Menu
 {
 public:
-  Menu(GenBST<Student>* ms, GenBST<Faculty>* mf);
+  Menu(GenBST<Student>* ms, GenBST<Faculty>* mf, unordered_set<int>* sSet, unordered_set<int>* fSet);
   ~Menu();
 
   void printMenu();
@@ -60,6 +61,8 @@ public:
 //inst vars
 GenBST<Student>* masterStudent;
 GenBST<Faculty>* masterFaculty;
+unordered_set<int>* studentMap;
+unordered_set<int>* facultyMap;
 
 private:
 };

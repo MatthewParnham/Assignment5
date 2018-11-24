@@ -5,14 +5,17 @@
 #include "Faculty.h"
 #include <stdlib.h>
 #include "GenBST.h"
+#include <unordered_set>
 
 using namespace std;
 
 //constructor/destructor=========================================================
-Menu::Menu(GenBST<Student>* ms, GenBST<Faculty>* mf)
+Menu::Menu(GenBST<Student>* ms, GenBST<Faculty>* mf, unordered_set<int>* sSet, unordered_set<int>* fSet)
 {
   masterStudent = ms;
   masterFaculty = mf;
+  studentMap = sSet;
+  facultyMap = fSet;
 }
 
 Menu::~Menu()
@@ -72,11 +75,13 @@ void Menu::prompt(int ans)
 
     case 5:
       cout << "What is the Student's ID?: ";
+      cin >> id;
       printAdvisor(id);
       break;
 
     case 6:
       cout << "What is the faculty member's ID?: ";
+      cin >> id;
       printAdvisees(id);
       break;
 
@@ -169,53 +174,101 @@ void Menu::printFaculty()
 //3
 void Menu::findStudent(int id)
 {
-  cout << "FINDING STUDENT" << endl;
-  cout << masterStudent->search(id) << endl;
+  if(studentMap->count(id) > 0) {
+    cout << masterStudent->search(id) << endl;
+  }
+  else {
+    cout << "No student found with that ID." << endl;
+  }
 }
 
 //4
 void Menu::findFaculty(int id)
 {
-  cout << "FINDING FACULTY" << endl;
-  cout << masterFaculty->search(id) << endl;
+  if(facultyMap->count(id) > 0) {
+    cout << masterFaculty->search(id) << endl;
+  }
+  else {
+    cout << "No faculty member found with that ID." << endl;
+  }
 }
 
 //5
 void Menu::printAdvisor(int id)
 {
-  cout << "PRINTING ADVISOR" << endl;
+  if(studentMap->count(id) > 0) {
+    cout << masterFaculty->search(masterStudent->search(id).getAdvisor()) << endl;
+  }
+  else {
+    cout << "No student found with that ID." << endl;
+  }
 }
 
 //6
 void Menu::printAdvisees(int id)
 {
-  cout << "PRINTING ADVISEES" << endl;
+  if(facultyMap->count(id) > 0) {
+    ListNode<int> *curr = masterFaculty->search(id).adviseeList->getFront();
+
+    while(curr != NULL)
+    {
+      cout << masterStudent->search(*curr->data) << endl;
+      curr = curr->next;
+    }
+  }
+  else {
+    cout << "No faculty member found with that ID." << endl;
+  }
 }
 
 //7
 void Menu::addStudent(int id, string n, string l, string m, int a)
 {
-  cout << "ADDING STUDENT" << endl;
-  masterStudent->insert(*(new Student(id,n,l,m,a)));
+  if(studentMap->count(id) == 0) {
+    masterStudent->insert(*(new Student(id,n,l,m,a)));
+    studentMap->insert(id);
+    cout << "Student added." << endl;
+  }
+  else {
+    cout << "ID already taken. Student not added." << endl;
+  }
 }
 
 //8
 void Menu::deleteStudent(int id) {
-  cout << "DELETING STUDENT" << endl;
-  masterStudent->deleteRec(masterStudent->search(id));
+  if(studentMap->count(id) > 0) {
+    masterStudent->deleteRec(masterStudent->search(id));
+    studentMap->erase(id);
+    cout << "Student deleted." << endl;
+  }
+  else {
+    cout << "Student not found." << endl;
+  }
 }
 
 //9
 void Menu::addFaculty(int id, string n, string l, string d) {
-  cout << "ADDING FACULTY" << endl;
-  masterFaculty->insert(*(new Faculty(id,n,l,d)));
+  if(facultyMap->count(id) == 0) {
+    masterFaculty->insert(*(new Faculty(id,n,l,d)));
+    facultyMap->insert(id);
+    cout << "Faculty member added." << endl;
+  }
+  else {
+    cout << "ID already taken. Faculty member not added." << endl;
+  }
 }
 
 
 //10
 void Menu::deleteFaculty(int id) {
-  cout << "DELETING FACULTY" << endl;
-  masterFaculty->deleteRec(masterFaculty->search(id));
+  if(facultyMap->count(id) > 0) {
+    masterFaculty->deleteRec(masterFaculty->search(id));
+    facultyMap->erase(id);
+    cout << "Faculty member deleted." << endl;
+  }
+  else {
+    cout << "Faculty member not found." << endl;
+  }
 }
 
 //11
@@ -230,5 +283,5 @@ void removeAdvisee(int sid, int fid) {
 
 //13
 void rollBack() {
-  
+
 }

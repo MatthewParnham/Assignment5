@@ -9,6 +9,7 @@
 #include "GenDoublyLL.h"
 #include <fstream>
 #include <string>
+#include <unordered_set>
 
 using namespace std;
 
@@ -17,6 +18,8 @@ int main(int argc, char const *argv[]) {
   // Declare Tables
   GenBST<Student> masterStudent;
   GenBST<Faculty> masterFaculty;
+  unordered_set<int> studentMap;
+  unordered_set<int> facultyMap;
 
   // Check if save file exists
 
@@ -31,6 +34,7 @@ int main(int argc, char const *argv[]) {
       string major = line.substr(line.find("Major")+7,line.find("Advisor")-1-(line.find("Major")+7));
       int advisor = stoi(line.substr(line.find("Advisor")+9,string::npos));
       masterStudent.insert(*(new Student(ID,name,level,major,advisor)));
+      studentMap.insert(ID);
     }
   }
   in.close();
@@ -44,6 +48,7 @@ int main(int argc, char const *argv[]) {
       string level = line.substr(line.find("Level")+7,line.find("Department")-1-(line.find("Level")+7));
       string department = line.substr(line.find("Department")+12,line.find("Advisees")-1-(line.find("Department")+12));
       masterFaculty.insert(*(new Faculty(ID,name,level,department)));
+      facultyMap.insert(ID);
       string advisees = line.substr(line.find("Advisees")+10,string::npos);
 
       for (int i = 0; i < advisees.length(); i++) { //advisee list is loaded in
@@ -58,7 +63,7 @@ int main(int argc, char const *argv[]) {
   in.close();
 
 //Main Loop of program
-  Menu menu(&masterStudent,&masterFaculty);
+  Menu menu(&masterStudent,&masterFaculty, &studentMap, &facultyMap);
   int ans;
   while(ans != 14) {
     menu.printMenu(); //menu is printed
