@@ -126,6 +126,9 @@ void Menu::prompt(int ans)
       break;
 
     case 10:
+      cout << "Faculty's ID: ";
+      cin >> id;
+      deleteFaculty(id);
       break;
 
     case 11:
@@ -210,7 +213,10 @@ void Menu::addFaculty(int id, string n, string l, string d) {
 
 
 //10
-
+void Menu::deleteFaculty(int id) {
+  cout << "DELETING FACULTY" << endl;
+  masterFaculty->deleteRec(masterFaculty->search(id));
+}
 
 //11
 
