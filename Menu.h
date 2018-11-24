@@ -22,10 +22,10 @@ public:
   void printFaculty();
 
 //3. Find student with given ID
-  Student findStudent(int id);
+  void findStudent(int id);
 
 //4. Find faculty with given ID
-  Faculty findFaculty(int id);
+  void findFaculty(int id);
 
 //5. print faculty advisor of student with given ID
   void printAdvisor(int id);
@@ -40,7 +40,7 @@ public:
   void deleteStudent(int id);
 
 //9. add Faculty
-  void addFaculty(Faculty f);
+  void addFaculty(int id, string n, string l, string d);
 
 //10. delete faculty with ID
   void deleteFaculty(int id);

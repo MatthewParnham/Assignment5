@@ -25,6 +25,8 @@ public:
   friend bool operator<(Faculty& s1, int i);
   friend bool operator==(Faculty& s1, Faculty& s2);
   friend bool operator==(Faculty& s1, int i);
+  friend bool operator!=(Faculty& s1, Faculty& s2);
+  friend bool operator!=(Faculty& s1, int i);
   friend ostream& operator<<(ostream& os, const Faculty& s1);
 private:
   string department;

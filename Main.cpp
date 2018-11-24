@@ -62,7 +62,9 @@ int main(int argc, char const *argv[]) {
   int ans;
   while(ans != 14) {
     menu.printMenu();
+    cout << "\nYour Selection: ";
     cin >> ans;
+    cout << endl;
     menu.prompt(ans);
   }
 

@@ -23,32 +23,32 @@ Menu::~Menu()
 
 void Menu::printMenu()
 {
-  cout << "MENU OPTIONS:\n"
-  "Print all students and their information (1)\n"
-  "Print all faculty and their information (2)\n"
+  cout << "\nMENU OPTIONS:\n"
+  "1. Print all students and their information (1)\n"
+  "2. Print all faculty and their information (2)\n"
   "\n"
-  "Search for student and display information (3)\n"
-  "Search for faculty and display information (4)\n"
+  "3. Search for student and display information (3)\n"
+  "4. Search for faculty and display information (4)\n"
   "\n"
-  "Using student ID, print corresponding name and info of faculty advisor (5)\n"
-  "Using faculty ID, print list of all names and info of their advisees (6)\n"
+  "5. Using student ID, print corresponding name and info of faculty advisor (5)\n"
+  "6. Using faculty ID, print list of all names and info of their advisees (6)\n"
   "\n"
-  "Add a new student (7)\n"
-  "Delete a student (8)\n"
+  "7. Add a new student (7)\n"
+  "8. Delete a student (8)\n"
   "\n"
-  "Add a new faculty member (9)\n"
-  "Delete a faculty member (10)\n"
+  "9. Add a new faculty member (9)\n"
+  "10. Delete a faculty member (10)\n"
   "\n"
-  "Change a student's advisor (11)\n"
-  "Remove an advisee from a faculty member (12)\n"
-  "Rollback, undo (13)\n"
-  "EXIT (14)\n";
+  "11. Change a student's advisor (11)\n"
+  "12. Remove an advisee from a faculty member (12)\n"
+  "13. Rollback, undo (13)\n"
+  "14. EXIT (14)\n";
 }
 
 void Menu::prompt(int ans)
 {
   int id, a;
-  string n, l, m;
+  string n, l, m, d;
   switch(ans) {
     case 1:
       printStudents();
@@ -60,6 +60,7 @@ void Menu::prompt(int ans)
 
     case 3:
       cout << "What is the student's ID?: ";
+      cin >> id;
       findStudent(id);
       break;
 
@@ -96,10 +97,32 @@ void Menu::prompt(int ans)
       break;
 
     case 8:
-      cout << "Student's ID:";
+      cout << "Student's ID: ";
+      cin >> id;
+      deleteStudent(id);
       break;
 
     case 9:
+      cout << "ID: " << endl;
+      cin >> id;
+      cin.ignore();
+      cout << "Name: " << endl;
+      getline(cin, n);
+      cout << "Level: " << endl;
+      getline(cin, l);
+      cout << "Department: " << endl;
+      getline(cin, d);
+      cout << "How many advisees? " << endl;
+      addFaculty(id, n, l, d);
+      int idcount;
+      cin >> idcount;
+      int advisee;
+      for(int i = 0; i < idcount; i++) {
+        cout << "Advisee ID: " << endl;
+        cin >> advisee;
+        masterFaculty->search(id).adviseeList->insertFront(new int(advisee));
+      }
+
       break;
 
     case 10:
@@ -141,16 +164,17 @@ void Menu::printFaculty()
 }
 
 //3
-Student Menu::findStudent(int id)
+void Menu::findStudent(int id)
 {
   cout << "FINDING STUDENT" << endl;
-
+  cout << masterStudent->search(id) << endl;
 }
 
 //4
-Faculty Menu::findFaculty(int id)
+void Menu::findFaculty(int id)
 {
   cout << "FINDING FACULTY" << endl;
+  cout << masterFaculty->search(id) << endl;
 }
 
 //5
@@ -173,10 +197,16 @@ void Menu::addStudent(int id, string n, string l, string m, int a)
 }
 
 //8
-
+void Menu::deleteStudent(int id) {
+  cout << "DELETING STUDENT" << endl;
+  masterStudent->deleteRec(masterStudent->search(id));
+}
 
 //9
-
+void Menu::addFaculty(int id, string n, string l, string d) {
+  cout << "ADDING FACULTY" << endl;
+  masterFaculty->insert(*(new Faculty(id,n,l,d)));
+}
 
 
 //10

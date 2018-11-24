@@ -22,9 +22,11 @@ public:
   friend bool operator>(Student& s1, Student& s2);
   friend bool operator<(Student& s1, Student& s2);
   friend bool operator==(Student& s1, Student& s2);
+  friend bool operator!=(Student& s1, Student& s2);
   friend bool operator>(Student& s1, int i);
   friend bool operator<(Student& s1, int i);
   friend bool operator==(Student& s1, int i);
+  friend bool operator!=(Student& s1, int i);
   friend ostream& operator<<(ostream& os, const Student& s1);
 private:
   string major;
