@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include "GenBST.h"
 #include <unordered_set>
+#include <time.h>
 
 using namespace std;
 
@@ -21,6 +22,11 @@ Menu::Menu(GenBST<Student>* ms, GenBST<Faculty>* mf, unordered_set<int>* sSet, u
 Menu::~Menu()
 {
 
+}
+
+int Menu::randInt(int max) {
+  srand(time(NULL));
+  return (rand() % max) + 1;
 }
 
 
@@ -86,8 +92,6 @@ void Menu::prompt(int ans)
       break;
 
     case 7:
-      cout << "ID: " << endl;
-      cin >> id;
       cin.ignore();
       cout << "Name: " << endl;
       getline(cin, n);
@@ -98,7 +102,7 @@ void Menu::prompt(int ans)
       cout << "Advisor: " << endl;
       cin >> a;
 
-      addStudent(id, n, l, m, a);
+      addStudent(n, l, m, a);
       break;
 
     case 8:
@@ -108,8 +112,6 @@ void Menu::prompt(int ans)
       break;
 
     case 9:
-      cout << "ID: " << endl;
-      cin >> id;
       cin.ignore();
       cout << "Name: " << endl;
       getline(cin, n);
@@ -117,17 +119,7 @@ void Menu::prompt(int ans)
       getline(cin, l);
       cout << "Department: " << endl;
       getline(cin, d);
-      cout << "How many advisees? " << endl;
-      addFaculty(id, n, l, d);
-      int idcount;
-      cin >> idcount;
-      int advisee;
-      for(int i = 0; i < idcount; i++) {
-        cout << "Advisee ID: " << endl;
-        cin >> advisee;
-        masterFaculty->search(id).adviseeList->insertFront(new int(advisee));
-      }
-
+      addFaculty(n, l, d);
       break;
 
     case 10:
@@ -222,15 +214,21 @@ void Menu::printAdvisees(int id)
 }
 
 //7
-void Menu::addStudent(int id, string n, string l, string m, int a)
+void Menu::addStudent(string n, string l, string m, int a)
 {
-  if(studentMap->count(id) == 0) {
-    masterStudent->insert(*(new Student(id,n,l,m,a)));
-    studentMap->insert(id);
-    cout << "Student added." << endl;
-  }
-  else {
-    cout << "ID already taken. Student not added." << endl;
+  while(true) {
+    int id = randInt(500);
+    if(studentMap->count(id) == 0) {
+      if(facultyMap->count(a) == 0) {
+        cout << "No advisor exists with ID " << a << ". Student not added." << endl;
+        return;
+      }
+      masterStudent->insert(*(new Student(id,n,l,m,a)));
+      studentMap->insert(id);
+      masterFaculty->search(a).adviseeList->insertFront(new int(id));
+      cout << "Student added with ID " << id << "." << endl;
+      return;
+    }
   }
 }
 
@@ -247,14 +245,15 @@ void Menu::deleteStudent(int id) {
 }
 
 //9
-void Menu::addFaculty(int id, string n, string l, string d) {
-  if(facultyMap->count(id) == 0) {
-    masterFaculty->insert(*(new Faculty(id,n,l,d)));
-    facultyMap->insert(id);
-    cout << "Faculty member added." << endl;
-  }
-  else {
-    cout << "ID already taken. Faculty member not added." << endl;
+void Menu::addFaculty(string n, string l, string d) {
+  while(true) {
+    int id = randInt(500);
+    if(facultyMap->count(id) == 0) {
+      masterFaculty->insert(*(new Faculty(id,n,l,d)));
+      facultyMap->insert(id);
+      cout << "Faculty member added with ID " << id << "." << endl;
+      return;
+    }
   }
 }
 

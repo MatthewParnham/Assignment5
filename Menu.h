@@ -13,6 +13,8 @@ public:
   Menu(GenBST<Student>* ms, GenBST<Faculty>* mf, unordered_set<int>* sSet, unordered_set<int>* fSet);
   ~Menu();
 
+  int randInt(int max); //generates a random int between 1 and max
+
   void printMenu();
   void prompt(int ans);
 
@@ -35,13 +37,13 @@ public:
   void printAdvisees(int id);
 
 //7. Add Student
-  void addStudent(int id, string n, string l, string m, int a);
+  void addStudent(string n, string l, string m, int a);
 
 //8. delete student with ID
   void deleteStudent(int id);
 
 //9. add Faculty
-  void addFaculty(int id, string n, string l, string d);
+  void addFaculty(string n, string l, string d);
 
 //10. delete faculty with ID
   void deleteFaculty(int id);
