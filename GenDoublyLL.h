@@ -155,7 +155,7 @@ ListNode<T>* GenDoublyLL<T>::remove(T key)
 {
   ListNode<T> *current = front;
 
-  while(current->data != key)
+  while(*current->data != key)
   {
     current = current->next;
 

@@ -235,6 +235,7 @@ void Menu::addStudent(string n, string l, string m, int a)
 //8
 void Menu::deleteStudent(int id) {
   if(studentMap->count(id) > 0) {
+    masterFaculty->search(masterStudent->search(id).getAdvisor()).adviseeList->remove(id);
     masterStudent->deleteRec(masterStudent->search(id));
     studentMap->erase(id);
     cout << "Student deleted." << endl;

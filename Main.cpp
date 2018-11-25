@@ -14,7 +14,7 @@
 using namespace std;
 
 int main(int argc, char const *argv[]) {
-
+  
   // Declare Tables
   GenBST<Student> masterStudent;
   GenBST<Faculty> masterFaculty;
