@@ -31,9 +31,11 @@ public:
   friend bool operator==(Student& s1, int i);
   friend bool operator!=(Student& s1, int i);
   friend ostream& operator<<(ostream& os, const Student& s1);
+
+  int advisor;
 private:
   string major;
-  int advisor;
+
   double GPA;
 
 };

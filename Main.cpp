@@ -10,6 +10,7 @@
 #include <fstream>
 #include <string>
 #include <unordered_set>
+#include <limits>
 
 using namespace std;
 
@@ -65,13 +66,26 @@ int main(int argc, char const *argv[]) {
 
 //Main Loop of program
   Menu menu(&masterStudent,&masterFaculty, &studentMap, &facultyMap);
-  int ans;
+  int ans = 0;
   while(ans != 14) {
     menu.printMenu(); //menu is printed
     cout << "\nYour Selection: "; //user input is taken
-    cin >> ans;
-    cout << endl;
-    menu.prompt(ans); //input is parsed and appropriate function is called
+    while (!(cin >> ans))
+    {
+      cin.clear();
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+      cerr << "INVALID INPUT please enter an Integer" << endl;
+    }
+
+    if(ans > 0 && ans < 15)
+    {
+      cout << endl;
+      menu.prompt(ans); //input is parsed and appropriate function is called
+    }
+
+    else{
+      cout << "INVALID INPUT" << endl;
+    }
   }
 
 

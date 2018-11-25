@@ -132,6 +132,11 @@ void Menu::prompt(int ans)
       break;
 
     case 11:
+      cout << "Student's ID: ";
+      cin >> id;
+      cout << "New Advisor ID: ";
+      cin >> a;
+      changeAdvisor(id, a);
       break;
 
     case 12:
@@ -280,7 +285,20 @@ void Menu::deleteFaculty(int id) {
 }
 
 //11
-void changeAdvisor(int sid, int fid) {
+void Menu::changeAdvisor(int sid, int fid) {
+  if(studentMap->count(sid) > 0) {
+    if(facultyMap->count(fid) == 0) {
+      cout << "No advisor exists with ID " << fid << ". Student not added." << endl;
+      return;
+    }
+    masterFaculty->search(masterStudent->search(sid).getAdvisor()).adviseeList->remove(sid); //remove student from original advisor
+    masterFaculty->search(fid).adviseeList->insertFront(new int(sid)); //add student to new advisor
+    masterStudent->search(sid).setAdvisor(fid); //set new advisor to student
+    cout << "Student removed from original advisor to Faculty Member " << fid << "." << endl;
+  }
+  else {
+    cout << "Student not found." << endl;
+  }
 
 }
 
