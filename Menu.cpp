@@ -265,9 +265,14 @@ void Menu::addFaculty(string n, string l, string d) {
 //10
 void Menu::deleteFaculty(int id) {
   if(facultyMap->count(id) > 0) {
-    masterFaculty->deleteRec(masterFaculty->search(id));
-    facultyMap->erase(id);
-    cout << "Faculty member deleted." << endl;
+    if(masterFaculty->search(id).adviseeList->getSize() > 0) {
+      cout << "Please reassign this faculty member's advisees before deleting." << endl;
+    }
+    else {
+      masterFaculty->deleteRec(masterFaculty->search(id));
+      facultyMap->erase(id);
+      cout << "Faculty member deleted." << endl;
+    }
   }
   else {
     cout << "Faculty member not found." << endl;
