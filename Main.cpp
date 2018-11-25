@@ -55,7 +55,7 @@ int main(int argc, char const *argv[]) {
 
       for (int i = 0; i < advisees.length(); i++) { //advisee list is loaded in
         if(advisees[i] == ' ') {
-          masterFaculty.search(ID).adviseeList->insertFront(new int(stoi(advisees.substr(0,i))));
+          masterFaculty.search(ID)->key.adviseeList->insertFront(new int(stoi(advisees.substr(0,i))));
           advisees = advisees.substr(i+1,string::npos);
           i = -1;
         }

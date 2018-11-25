@@ -181,7 +181,7 @@ void Menu::printFaculty()
 void Menu::findStudent(int id)
 {
   if(studentMap->count(id) > 0) {
-    cout << masterStudent->search(id) << endl;
+    cout << masterStudent->search(id)->key << endl;
   }
   else {
     cout << "No student found with that ID." << endl;
@@ -192,7 +192,7 @@ void Menu::findStudent(int id)
 void Menu::findFaculty(int id)
 {
   if(facultyMap->count(id) > 0) {
-    cout << masterFaculty->search(id) << endl;
+    cout << masterFaculty->search(id)->key << endl;
   }
   else {
     cout << "No faculty member found with that ID." << endl;
@@ -203,7 +203,7 @@ void Menu::findFaculty(int id)
 void Menu::printAdvisor(int id)
 {
   if(studentMap->count(id) > 0) {
-    cout << masterFaculty->search(masterStudent->search(id).getAdvisor()) << endl;
+    cout << masterFaculty->search(masterStudent->search(id)->key.getAdvisor())->key << endl;
   }
   else {
     cout << "No student found with that ID." << endl;
@@ -214,11 +214,11 @@ void Menu::printAdvisor(int id)
 void Menu::printAdvisees(int id)
 {
   if(facultyMap->count(id) > 0) {
-    ListNode<int> *curr = masterFaculty->search(id).adviseeList->getFront();
+    ListNode<int> *curr = masterFaculty->search(id)->key.adviseeList->getFront();
 
     while(curr != NULL)
     {
-      cout << masterStudent->search(*curr->data) << endl;
+      cout << masterStudent->search(*curr->data)->key << endl;
       curr = curr->next;
     }
   }
@@ -239,7 +239,7 @@ void Menu::addStudent(string n, string l, string m, double g, int a)
       }
       masterStudent->insert(*(new Student(id,n,l,m,g,a)));
       studentMap->insert(id);
-      masterFaculty->search(a).adviseeList->insertFront(new int(id));
+      masterFaculty->search(a)->key.adviseeList->insertFront(new int(id));
       cout << "Student added with ID " << id << "." << endl;
       return;
     }
@@ -249,8 +249,8 @@ void Menu::addStudent(string n, string l, string m, double g, int a)
 //8
 void Menu::deleteStudent(int id) {
   if(studentMap->count(id) > 0) {
-    masterFaculty->search(masterStudent->search(id).getAdvisor()).adviseeList->remove(id);
-    masterStudent->deleteRec(masterStudent->search(id));
+    masterFaculty->search(masterStudent->search(id)->key.getAdvisor())->key.adviseeList->remove(id);
+    masterStudent->deleteRec(masterStudent->search(id)->key);
     studentMap->erase(id);
     cout << "Student deleted." << endl;
   }
@@ -276,11 +276,11 @@ void Menu::addFaculty(string n, string l, string d) {
 //10
 void Menu::deleteFaculty(int id) {
   if(facultyMap->count(id) > 0) {
-    if(masterFaculty->search(id).adviseeList->getSize() > 0) {
+    if(masterFaculty->search(id)->key.adviseeList->getSize() > 0) {
       cout << "Please reassign this faculty member's advisees before deleting." << endl;
     }
     else {
-      masterFaculty->deleteRec(masterFaculty->search(id));
+      masterFaculty->deleteRec(masterFaculty->search(id)->key);
       facultyMap->erase(id);
       cout << "Faculty member deleted." << endl;
     }
@@ -297,9 +297,9 @@ void Menu::changeAdvisor(int sid, int fid) {
       cout << "No advisor exists with ID " << fid << ". Student not added." << endl;
       return;
     }
-    masterFaculty->search(masterStudent->search(sid).getAdvisor()).adviseeList->remove(sid); //remove student from original advisor
-    masterFaculty->search(fid).adviseeList->insertFront(new int(sid)); //add student to new advisor
-    masterStudent->search(sid).setAdvisor(fid); //set new advisor to student
+    masterFaculty->search(masterStudent->search(sid)->key.getAdvisor())->key.adviseeList->remove(sid); //remove student from original advisor
+    masterFaculty->search(fid)->key.adviseeList->insertFront(new int(sid)); //add student to new advisor
+    masterStudent->search(sid)->key.setAdvisor(fid); //set new advisor to student
     cout << "Student removed from original advisor to Faculty Member " << fid << "." << endl;
   }
   else {
@@ -338,6 +338,8 @@ void Menu::removeAdvisee(int sid, int fid) {
 
   else if(ans == 2)
   {
+    cout << "What is the ID of the new Advisor?: ";
+    cin >> fid;
     changeAdvisor(sid, fid);
   }
 }
