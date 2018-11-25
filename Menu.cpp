@@ -7,6 +7,7 @@
 #include "GenBST.h"
 #include <unordered_set>
 #include <time.h>
+#include <limits>
 
 using namespace std;
 
@@ -140,6 +141,11 @@ void Menu::prompt(int ans)
       break;
 
     case 12:
+      cout << "Student's ID: ";
+      cin >> id;
+      cout << "Faculty's ID: ";
+      cin >> a;
+      removeAdvisee(id, a);
       break;
 
     case 13:
@@ -303,8 +309,37 @@ void Menu::changeAdvisor(int sid, int fid) {
 }
 
 //12
-void removeAdvisee(int sid, int fid) {
+void Menu::removeAdvisee(int sid, int fid) {
+  cout << "Would you like to then delete the student (1) or change their advisor (2)?: ";
+  int ans = 0;
+  while(ans != 1 || ans != 2)
+  {
+    while (!(cin >> ans))
+    {
+      cin.clear();
+      cin.ignore(numeric_limits<streamsize>::max(), '\n');
+      cerr << "INVALID INPUT please enter an Integer" << endl;
+    }
 
+    if(ans == 1 || ans == 2)
+    {
+      break;
+    }
+
+    else{
+      cout << "INVALID INPUT" << endl;
+    }
+  }
+
+  if(ans == 1)
+  {
+    deleteStudent(sid);
+  }
+
+  else if(ans == 2)
+  {
+    changeAdvisor(sid, fid);
+  }
 }
 
 //13
