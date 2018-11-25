@@ -37,7 +37,7 @@ public:
   void printAdvisees(int id);
 
 //7. Add Student
-  void addStudent(string n, string l, string m, int a);
+  void addStudent(string n, string l, string m, double g, int a);
 
 //8. delete student with ID
   void deleteStudent(int id);

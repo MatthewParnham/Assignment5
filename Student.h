@@ -10,7 +10,7 @@ using namespace std;
 class Student : public Person {
 public:
   Student();
-  Student(int id, string n, string l, string m, int a); //takes ID, name, level, major, and advisor's ID as args
+  Student(int id, string n, string l, string m, double g, int a); //takes ID, name, level, major, and advisor's ID as args
   ~Student();
 
   string getMajor();
@@ -18,6 +18,9 @@ public:
 
   int getAdvisor();
   void setAdvisor(int a);
+
+  double getGPA();
+  void setGPA(double g);
 
   friend bool operator>(Student& s1, Student& s2);
   friend bool operator<(Student& s1, Student& s2);
@@ -31,6 +34,7 @@ public:
 private:
   string major;
   int advisor;
+  double GPA;
 
 };
 

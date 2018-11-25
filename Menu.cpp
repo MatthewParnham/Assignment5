@@ -58,6 +58,7 @@ void Menu::prompt(int ans)
 {
   int id, a;
   string n, l, m, d;
+  double g;
   switch(ans) {
     case 1:
       printStudents();
@@ -99,10 +100,12 @@ void Menu::prompt(int ans)
       getline(cin, l);
       cout << "Major: " << endl;
       getline(cin, m);
+      cout << "GPA: " << endl;
+      cin >> g;
       cout << "Advisor: " << endl;
       cin >> a;
 
-      addStudent(n, l, m, a);
+      addStudent(n, l, m, g, a);
       break;
 
     case 8:
@@ -214,7 +217,7 @@ void Menu::printAdvisees(int id)
 }
 
 //7
-void Menu::addStudent(string n, string l, string m, int a)
+void Menu::addStudent(string n, string l, string m, double g, int a)
 {
   while(true) {
     int id = randInt(500);
@@ -223,7 +226,7 @@ void Menu::addStudent(string n, string l, string m, int a)
         cout << "No advisor exists with ID " << a << ". Student not added." << endl;
         return;
       }
-      masterStudent->insert(*(new Student(id,n,l,m,a)));
+      masterStudent->insert(*(new Student(id,n,l,m,g,a)));
       studentMap->insert(id);
       masterFaculty->search(a).adviseeList->insertFront(new int(id));
       cout << "Student added with ID " << id << "." << endl;

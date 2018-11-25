@@ -12,15 +12,17 @@ Student::Student() {
   name = "NULL";
   level = "NULL";
   major = "NULL";
+  GPA = 0;
   advisor = 0;
 }
 
-Student::Student(int id, string n, string l, string m, int a)
+Student::Student(int id, string n, string l, string m, double g, int a)
 {
   ID = id;
   name = n;
   level = l;
   major = m;
+  GPA = g;
   advisor = a;
 }
 
@@ -40,6 +42,13 @@ int Student::getAdvisor() {
 }
 void Student::setAdvisor(int a) {
   advisor = a;
+}
+
+double Student::getGPA() {
+  return GPA;
+}
+void Student::setGPA(double g) {
+  GPA = g;
 }
 
 //operator overloading
@@ -68,6 +77,6 @@ bool operator!=(Student& s1, int i) {
   return s1.getID() != i;
 }
 ostream& operator<<(ostream& os, const Student& s1) {
-  os << "ID: " << s1.ID << " Name: " << s1.name << " Level: " << s1.level << " Major: " << s1.major << " Advisor: " << s1.advisor;
+  os << "ID: " << s1.ID << " Name: " << s1.name << " Level: " << s1.level << " Major: " << s1.major << " GPA: " << s1.GPA << " Advisor: " << s1.advisor;
   return os;
 }
