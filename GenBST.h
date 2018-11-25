@@ -21,8 +21,8 @@ class GenBST
     bool deleteRec(T k);
     bool isEmpty();
 
-    T search(T key);
-    T search(int key);
+    GenTreeNode<T>* search(T key);
+    GenTreeNode<T>* search(int key);
 
     GenTreeNode<T>* getSuccessor(GenTreeNode<T> *d);
 
@@ -175,11 +175,11 @@ bool GenBST<T>::contains(T value)
 }
 
 template <class T>
-T GenBST<T>::search(T key) {
+GenTreeNode<T>* GenBST<T>::search(T key) {
   GenTreeNode<T> *curr = root;
   while(curr != NULL) {
     if(curr->key == key) {
-      return curr->key;
+      return curr;
     }
     else {
       if(curr->key > key) {
@@ -190,15 +190,15 @@ T GenBST<T>::search(T key) {
       }
     }
   }
-  return curr->key;
+  return curr;
 }
 
 template <class T>
-T GenBST<T>::search(int key) {
+GenTreeNode<T>* GenBST<T>::search(int key) {
   GenTreeNode<T> *curr = root;
   while(curr != NULL) {
     if(curr->key == key) {
-      return curr->key;
+      return curr;
     }
     else {
       if(curr->key > key) {
@@ -209,7 +209,7 @@ T GenBST<T>::search(int key) {
       }
     }
   }
-  return curr->key;
+  return curr;
 }
 
 template <class T>
