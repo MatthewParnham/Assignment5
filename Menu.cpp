@@ -55,7 +55,7 @@ void Menu::printMenu()
   "14. EXIT (14)\n";
 }
 
-void Menu::prompt(int ans)
+void Menu::prompt(int ans) //parses user input to select which function to call
 {
   int id, a;
   string n, l, m, d;
@@ -224,21 +224,21 @@ void Menu::prompt(int ans)
 }
 
 //1
-void Menu::printStudents()
+void Menu::printStudents() //prints the student tree
 {
   cout << "PRINTING STUDENTS" << endl;
   masterStudent->printTree();
 }
 
 //2
-void Menu::printFaculty()
+void Menu::printFaculty() //prints the faculty tree
 {
   cout << "PRINTING FACULTY" << endl;
   masterFaculty->printTree();
 }
 
 //3
-void Menu::findStudent(int id)
+void Menu::findStudent(int id) //given an id, student info is printed if the student exists
 {
   if(studentMap->count(id) > 0) {
     cout << masterStudent->search(id)->key << endl;
@@ -249,7 +249,7 @@ void Menu::findStudent(int id)
 }
 
 //4
-void Menu::findFaculty(int id)
+void Menu::findFaculty(int id) //given an id, faculty info is printed if the faculty exists
 {
   if(facultyMap->count(id) > 0) {
     cout << masterFaculty->search(id)->key << endl;
@@ -260,7 +260,7 @@ void Menu::findFaculty(int id)
 }
 
 //5
-void Menu::printAdvisor(int id)
+void Menu::printAdvisor(int id) //prints a student's advisor if the student exists
 {
   if(studentMap->count(id) > 0) {
     cout << masterFaculty->search(masterStudent->search(id)->key.getAdvisor())->key << endl;
@@ -271,7 +271,7 @@ void Menu::printAdvisor(int id)
 }
 
 //6
-void Menu::printAdvisees(int id)
+void Menu::printAdvisees(int id) //prints the linked list of faculty's advisees
 {
   if(facultyMap->count(id) > 0) {
     ListNode<int> *curr = masterFaculty->search(id)->key.adviseeList->getFront();
@@ -289,17 +289,17 @@ void Menu::printAdvisees(int id)
 
 //7
 void Menu::addStudent(string n, string l, string m, double g, int a)
-{
+{ //adds a new student to the student tree and logs ID in the student id hash set
   while(true) {
     int id = randInt(500);
-    if(studentMap->count(id) == 0) {
-      if(facultyMap->count(a) == 0) {
+    if(studentMap->count(id) == 0) {//as long as ID isn't already taken
+      if(facultyMap->count(a) == 0) {//if the advisor does not exist
         cout << "No advisor exists with ID " << a << ". Student not added." << endl;
         return;
       }
       masterStudent->insert(*(new Student(id,n,l,m,g,a)));
       studentMap->insert(id);
-      masterFaculty->search(a)->key.adviseeList->insertFront(new int(id));
+      masterFaculty->search(a)->key.adviseeList->insertFront(new int(id));//referential integrity is enforced
       cout << "Student added with ID " << id << "." << endl;
       return;
     }
@@ -307,7 +307,7 @@ void Menu::addStudent(string n, string l, string m, double g, int a)
 }
 
 //8
-void Menu::deleteStudent(int id) {
+void Menu::deleteStudent(int id) { //student is deleted and removed from hash set and advisee list
   if(studentMap->count(id) > 0) {
     masterFaculty->search(masterStudent->search(id)->key.getAdvisor())->key.adviseeList->remove(id);
     masterStudent->deleteRec(masterStudent->search(id)->key);
@@ -320,7 +320,7 @@ void Menu::deleteStudent(int id) {
 }
 
 //9
-void Menu::addFaculty(string n, string l, string d) {
+void Menu::addFaculty(string n, string l, string d) { //adds a faculty member
   while(true) {
     int id = randInt(500);
     if(facultyMap->count(id) == 0) {
@@ -334,7 +334,7 @@ void Menu::addFaculty(string n, string l, string d) {
 
 
 //10
-void Menu::deleteFaculty(int id) {
+void Menu::deleteFaculty(int id) { //deletes a faculty member
   if(facultyMap->count(id) > 0) {
     if(masterFaculty->search(id)->key.adviseeList->getSize() > 0) {
       cout << "Please reassign this faculty member's advisees before deleting." << endl;
@@ -351,7 +351,7 @@ void Menu::deleteFaculty(int id) {
 }
 
 //11
-void Menu::changeAdvisor(int sid, int fid) {
+void Menu::changeAdvisor(int sid, int fid) { //given a student and faculty ID, the student's advisor is changed to the new faculty member
   if(studentMap->count(sid) > 0) {
     if(facultyMap->count(fid) == 0) {
       cout << "No advisor exists with ID " << fid << ". Student not added." << endl;
@@ -360,7 +360,7 @@ void Menu::changeAdvisor(int sid, int fid) {
     masterFaculty->search(masterStudent->search(sid)->key.getAdvisor())->key.adviseeList->remove(sid); //remove student from original advisor
     masterFaculty->search(fid)->key.adviseeList->insertFront(new int(sid)); //add student to new advisor
     masterStudent->search(sid)->key.setAdvisor(fid); //set new advisor to student
-    cout << "Student removed from original advisor to Faculty Member " << fid << "." << endl;
+    cout << "Student removed from original advisor and added to Faculty Member " << fid << "." << endl;
   }
   else {
     cout << "Student not found." << endl;
@@ -369,7 +369,7 @@ void Menu::changeAdvisor(int sid, int fid) {
 }
 
 //12
-void Menu::removeAdvisee(int sid, int fid) {
+void Menu::removeAdvisee(int sid, int fid) {//when removing an advisee, they either must be deleted or reassigned to maintain referential integrity
   cout << "Would you like to then delete the student (1) or change their advisor (2)?: ";
   int ans = 0;
   while(ans != 1 || ans != 2)
