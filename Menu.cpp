@@ -71,25 +71,45 @@ void Menu::prompt(int ans)
 
     case 3:
       cout << "What is the student's ID?: ";
-      cin >> id;
+      while (!(cin >> id))
+      {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cerr << "INVALID INPUT please enter an Integer" << endl;
+      }
       findStudent(id);
       break;
 
     case 4:
       cout << "What is the faculty member's ID?: ";
-      cin >> id;
+      while (!(cin >> id))
+      {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cerr << "INVALID INPUT please enter an Integer" << endl;
+      }
       findFaculty(id);
       break;
 
     case 5:
       cout << "What is the Student's ID?: ";
-      cin >> id;
+      while (!(cin >> id))
+      {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cerr << "INVALID INPUT please enter an Integer" << endl;
+      }
       printAdvisor(id);
       break;
 
     case 6:
       cout << "What is the faculty member's ID?: ";
-      cin >> id;
+      while (!(cin >> id))
+      {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cerr << "INVALID INPUT please enter an Integer" << endl;
+      }
       printAdvisees(id);
       break;
 
@@ -102,16 +122,31 @@ void Menu::prompt(int ans)
       cout << "Major: " << endl;
       getline(cin, m);
       cout << "GPA: " << endl;
-      cin >> g;
-      cout << "Advisor: " << endl;
-      cin >> a;
+      while (!(cin >> g))
+      {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cerr << "INVALID INPUT please enter an Integer" << endl;
+      }
+      cout << "Advisor ID: " << endl;
+      while (!(cin >> a))
+      {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cerr << "INVALID INPUT please enter an Integer" << endl;
+      }
 
       addStudent(n, l, m, g, a);
       break;
 
     case 8:
       cout << "Student's ID: ";
-      cin >> id;
+      while (!(cin >> id))
+      {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cerr << "INVALID INPUT please enter an Integer" << endl;
+      }
       deleteStudent(id);
       break;
 
@@ -128,23 +163,48 @@ void Menu::prompt(int ans)
 
     case 10:
       cout << "Faculty's ID: ";
-      cin >> id;
+      while (!(cin >> id))
+      {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cerr << "INVALID INPUT please enter an Integer" << endl;
+      }
       deleteFaculty(id);
       break;
 
     case 11:
       cout << "Student's ID: ";
-      cin >> id;
+      while (!(cin >> id))
+      {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cerr << "INVALID INPUT please enter an Integer" << endl;
+      }
       cout << "New Advisor ID: ";
-      cin >> a;
+      while (!(cin >> a))
+      {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cerr << "INVALID INPUT please enter an Integer" << endl;
+      }
       changeAdvisor(id, a);
       break;
 
     case 12:
       cout << "Student's ID: ";
-      cin >> id;
+      while (!(cin >> id))
+      {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cerr << "INVALID INPUT please enter an Integer" << endl;
+      }
       cout << "Faculty's ID: ";
-      cin >> a;
+      while (!(cin >> a))
+      {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cerr << "INVALID INPUT please enter an Integer" << endl;
+      }
       removeAdvisee(id, a);
       break;
 
@@ -345,6 +405,6 @@ void Menu::removeAdvisee(int sid, int fid) {
 }
 
 //13
-void rollBack() {
+void Menu::rollBack() {
 
 }
