@@ -1,7 +1,7 @@
 # Assignment5
 ## Database
 
-atom://teletype/portal/593e3e7a-7248-4728-8925-8326a212ff29
+Simple Database that holds students and faculty members.
 
 Tristan Chilvers
 2288893
